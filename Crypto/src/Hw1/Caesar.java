@@ -2,10 +2,10 @@ package Hw1;
 import java.util.*;
 
 public class Caesar {
-	//simple solution for Caesar cipher
+	//simple solution for Caesar cypher
 	public static String Caesar(String str,int offset){
 		str = str.toLowerCase();
-		String ret = null;
+		String ret = "";
 		char[] chars = str.toCharArray();
 		for(char c:chars){
 		int x = (int)c;
@@ -23,9 +23,12 @@ public class Caesar {
 	public static void findvalue(int x, int y,int gcd){
 		int currx = x;
 		int curry = y;
-		int inc = (y-y%x)/x;
+//a + b = c
+		//int inc = (y-y%x)/x-2;
+		int inc = 1;
 		while(true){
-			if(currx == gcd - curry || currx == gcd + curry){
+			
+			if(currx == gcd - curry || currx == -gcd +curry){
 			if(currx == gcd + curry)
 				curry = -curry;
 			else
@@ -38,14 +41,12 @@ public class Caesar {
 		}else{
 			currx+=(x*inc);
 		}
+		if(currx == 1284780) break;
 		}
 		System.out.println(currx + " +" + curry + " = " + gcd);
 		System.out.println(currx/x + "*"+x+" + " + curry/y+"*" + y + " = "+gcd);
 	}
-	//123 21
-	//123 = 21*5+18
-	//21 = 18*1 + 3
-	//18 = 3*6 + 0
+	
 	//Run the Euclidean algorithm for finding gcd
 	//returns a stack of the number to be used to solve ax+by = gcd
 	public static Stack<Integer> Euclidean(int x, int y){
@@ -71,11 +72,9 @@ public class Caesar {
 		stack.pop();
 		return stack;
 	}
-	//123 = 21*5+18
-	//21 = 18*1 + 3
-	//18 = 3*6 + 0
-	//3 = 21 - 1*18
-	//3 = 21 - 1*(123-21*2)
+	
+	//returns the solution for ax+by=gcd
+	//using stack returned from Euclidean algorithm
 	public static void solvegcd(Stack<Integer> stack){
 		System.out.println(stack);
 		Queue<Integer> q = new LinkedList<Integer>();
@@ -115,10 +114,11 @@ public class Caesar {
 	}
 
 	public static void main(String[] args) {
-		//findvalue(21,123,3);
-		//Euclidean(47,30);
-		Stack<Integer> stack = Euclidean(47,30);
-		solvegcd(stack);
+		findvalue(16261,85652,161);
+		
+		//Stack<Integer> stack = Euclidean(16261,85652);
+		//solvegcd(stack);
+		//System.out.println(Caesar("gxktg", 11));
 		
 	}
 }
